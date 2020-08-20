@@ -1,0 +1,38 @@
+SystemComponentArchitecture SystemRealSenseVisualization
+{
+ComponentInstance ComponentRealSenseV2Server instantiates ComponentRealSenseV2Server
+	{
+		RequiredService basePushTimedClient
+		RequiredService ptuPosePushNewestClient
+		RequiredService UrPosePushTimedClient
+		RequiredService UrPoseQueryClient
+		ProvidedService depthPushNewestServer
+		ProvidedService imagePushNewestServer
+		ProvidedService colorImagePushNewestServer
+		ProvidedService imageQueryServer
+		ProvidedService colorImageQueryServer
+	}
+	ComponentInstance ComponentVisualization instantiates ComponentVisualization
+	{
+		RequiredService rgbdPushNewestClient
+		RequiredService rgbdQueryClient
+		RequiredService baseClient
+		RequiredService laserClient1
+		RequiredService laserClient2
+		RequiredService laserClient3
+		RequiredService irPushNewestClient
+		RequiredService imagePushNewestClient
+		RequiredService curPushClient
+		RequiredService depthPushNewestClient
+		RequiredService ultrasonicPushNewestClient
+		RequiredService personDetectionEventClient
+		RequiredService MarkerListDetectionServiceIn
+		RequiredService RGBDImageQueryServiceReq
+		RequiredService ltmQueryClient
+		RequiredService personDetectionQueryClient
+	}
+	Connection ComponentVisualization.imagePushNewestClient -> ComponentRealSenseV2Server.colorImagePushNewestServer
+	Connection ComponentVisualization.rgbdPushNewestClient -> ComponentRealSenseV2Server.imagePushNewestServer
+	Connection ComponentVisualization.RGBDImageQueryServiceReq -> ComponentRealSenseV2Server.imageQueryServer
+	Connection ComponentVisualization.depthPushNewestClient -> ComponentRealSenseV2Server.depthPushNewestServer
+}

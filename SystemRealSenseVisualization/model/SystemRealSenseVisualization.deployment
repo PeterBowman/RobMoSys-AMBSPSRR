@@ -1,0 +1,13 @@
+DeploymentModel SystemRealSenseVisualization using ComponentArchitecture SystemRealSenseVisualization
+{
+TargetPlatformReference PC1 using SystemRealSenseVisualization.PC1
+	{
+		UploadDirectory "/tmp"
+		NetworkInterface eth1
+	}
+	NamingService
+	{
+		deploy-to PC1 }
+	ComponentArtefact ComponentRealSenseV2Server deploy-to PC1
+	ComponentArtefact ComponentVisualization deploy-to PC1
+}
