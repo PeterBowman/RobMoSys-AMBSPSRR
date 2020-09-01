@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Misc
+**/build*/
+bin/
+src-gen/
+language.settings.xml

@@ -1,0 +1,6 @@
+TargetPlatformModel SystemRealSenseVisualization
+{
+TargetPlatformDefinition PC1
+	{
+		NetworkInterface eth1 { HostAddress "localhost" }
+	} }
