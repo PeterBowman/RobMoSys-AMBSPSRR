@@ -34,5 +34,4 @@
 # Misc
 **/build*/
 bin/
-src-gen/
-language.settings.xml
+.settings/
