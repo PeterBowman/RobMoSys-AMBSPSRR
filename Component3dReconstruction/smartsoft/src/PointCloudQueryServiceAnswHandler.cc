@@ -30,5 +30,20 @@ void PointCloudQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id,
 	
 	// implement your query handling logic here and fill in the answer object
 	
+	Smart::StatusCode status = COMP->stateSlave->tryAcquire("queryimage");
+
+	if (status == Smart::StatusCode::SMART_OK)
+	{
+		cv::Mat points;
+		COMP->kinfu->getPoints(points);
+
+		std::vector<CommBasicObjects::CommPosition3d> positions; // TODO: fill
+		answer.setPoints(positions);
+	}
+	else
+	{
+		answer.set_valid(false);
+	}
+
 	this->server->answer(id, answer);
 }

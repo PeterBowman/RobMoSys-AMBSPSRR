@@ -19,6 +19,8 @@
 	
 #include "aceSmartSoft.hh"
 #include <iostream>
+#include <opencv2/rgbd/kinfu.hpp>
+#include "ParameterStateStruct.hh"
 
 class Component3dReconstructionCore
 {
@@ -26,6 +28,10 @@ private:
 
 public:
 	Component3dReconstructionCore();
+	void setInitialParameters(const ParameterStateStruct& p);
+
+	cv::Ptr<cv::kinfu::KinFu> kinfu;
+	cv::Ptr<cv::kinfu::Params> params;
 };
 	
 #endif

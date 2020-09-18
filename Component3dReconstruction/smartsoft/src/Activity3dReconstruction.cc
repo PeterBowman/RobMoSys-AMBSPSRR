@@ -45,7 +45,37 @@ int Activity3dReconstruction::on_execute()
 	// to get the incoming data, use this methods:
 	Smart::StatusCode status;
 
-	std::cout << "Hello from Activity3dReconstruction " << std::endl;
+	DomainVision::CommDepthImage depthImageIn;
+	status = COMP->depthImagePushServiceIn->getUpdate(depthImageIn);
+
+	if (status == Smart::StatusCode::SMART_OK)
+	{
+		auto data = depthImageIn.getDataRef();
+		cv::Mat depth; // TODO: fill
+
+		if (!COMP->kinfu->update(depth))
+		{
+			std::cout << "kinfu reset\n";
+			COMP->kinfu->reset();
+		}
+
+		status = COMP->stateSlave->tryAcquire("pushimage");
+
+		if (status == Smart::StatusCode::SMART_OK)
+		{
+			cv::Mat rendered;
+			COMP->kinfu->render(rendered);
+
+			cv::Mat points;
+			COMP->kinfu->getPoints(points);
+
+			DomainVision::CommVideoImage rgbImageOut;
+			status = COMP->rGBImagePushServiceOut->put(rgbImageOut); // TODO: convert
+
+			DomainVision::Comm3dPointCloud pointCloudOut;
+			status = COMP->pointCloudPushServiceOut->put(pointCloudOut); // TODO: convert
+		}
+	}
 
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;

@@ -84,6 +84,163 @@ void ParamUpdateHandler::loadParameter(SmartACE::SmartIniParameter &parameter)
 		//
 		// load internal parameters (if any)
 		//
+		// parameter bilateral
+		if(parameter.getInteger("bilateral", "kernelSize", commitState.bilateral.kernelSize))
+		{
+			globalState.bilateral.kernelSize = commitState.bilateral.kernelSize;
+		}
+		if(parameter.getDouble("bilateral", "sigmaDepth", commitState.bilateral.sigmaDepth))
+		{
+			globalState.bilateral.sigmaDepth = commitState.bilateral.sigmaDepth;
+		}
+		if(parameter.getDouble("bilateral", "sigmaSpatial", commitState.bilateral.sigmaSpatial))
+		{
+			globalState.bilateral.sigmaSpatial = commitState.bilateral.sigmaSpatial;
+		}
+		// parameter icp
+		if(parameter.getDouble("icp", "angleThresh", commitState.icp.angleThresh))
+		{
+			globalState.icp.angleThresh = commitState.icp.angleThresh;
+		}
+		if(parameter.getDouble("icp", "distThresh", commitState.icp.distThresh))
+		{
+			globalState.icp.distThresh = commitState.icp.distThresh;
+		}
+		if(parameter.getInteger("icp", "iteration1", commitState.icp.iteration1))
+		{
+			globalState.icp.iteration1 = commitState.icp.iteration1;
+		}
+		if(parameter.getInteger("icp", "iteration2", commitState.icp.iteration2))
+		{
+			globalState.icp.iteration2 = commitState.icp.iteration2;
+		}
+		if(parameter.getInteger("icp", "iteration3", commitState.icp.iteration3))
+		{
+			globalState.icp.iteration3 = commitState.icp.iteration3;
+		}
+		if(parameter.getInteger("icp", "iteration4", commitState.icp.iteration4))
+		{
+			globalState.icp.iteration4 = commitState.icp.iteration4;
+		}
+		if(parameter.getInteger("icp", "iteration5", commitState.icp.iteration5))
+		{
+			globalState.icp.iteration5 = commitState.icp.iteration5;
+		}
+		if(parameter.getInteger("icp", "pyramidLevels", commitState.icp.pyramidLevels))
+		{
+			globalState.icp.pyramidLevels = commitState.icp.pyramidLevels;
+		}
+		// parameter lightPose
+		if(parameter.getInteger("lightPose", "x", commitState.lightPose.x))
+		{
+			globalState.lightPose.x = commitState.lightPose.x;
+		}
+		if(parameter.getInteger("lightPose", "y", commitState.lightPose.y))
+		{
+			globalState.lightPose.y = commitState.lightPose.y;
+		}
+		if(parameter.getInteger("lightPose", "z", commitState.lightPose.z))
+		{
+			globalState.lightPose.z = commitState.lightPose.z;
+		}
+		// parameter settings
+		if(parameter.getDouble("settings", "depthFactor", commitState.settings.depthFactor))
+		{
+			globalState.settings.depthFactor = commitState.settings.depthFactor;
+		}
+		if(parameter.getDouble("settings", "raycastStepFactor", commitState.settings.raycastStepFactor))
+		{
+			globalState.settings.raycastStepFactor = commitState.settings.raycastStepFactor;
+		}
+		if(parameter.getDouble("settings", "truncateThreshold", commitState.settings.truncateThreshold))
+		{
+			globalState.settings.truncateThreshold = commitState.settings.truncateThreshold;
+		}
+		std::string temp_settings_volumeType = "";
+		if(parameter.getString("settings", "volumeType", temp_settings_volumeType))
+		{
+			commitState.settings.volumeType = temp_settings_volumeType;
+			globalState.settings.volumeType = commitState.settings.volumeType;
+		}
+		if(parameter.getDouble("settings", "voxelSize", commitState.settings.voxelSize))
+		{
+			globalState.settings.voxelSize = commitState.settings.voxelSize;
+		}
+		// parameter tsdf
+		if(parameter.getInteger("tsdf", "maxWeight", commitState.tsdf.maxWeight))
+		{
+			globalState.tsdf.maxWeight = commitState.tsdf.maxWeight;
+		}
+		if(parameter.getDouble("tsdf", "minCameraMovement", commitState.tsdf.minCameraMovement))
+		{
+			globalState.tsdf.minCameraMovement = commitState.tsdf.minCameraMovement;
+		}
+		if(parameter.getDouble("tsdf", "truncDist", commitState.tsdf.truncDist))
+		{
+			globalState.tsdf.truncDist = commitState.tsdf.truncDist;
+		}
+		// parameter volumeDims
+		if(parameter.getInteger("volumeDims", "x", commitState.volumeDims.x))
+		{
+			globalState.volumeDims.x = commitState.volumeDims.x;
+		}
+		if(parameter.getInteger("volumeDims", "y", commitState.volumeDims.y))
+		{
+			globalState.volumeDims.y = commitState.volumeDims.y;
+		}
+		if(parameter.getInteger("volumeDims", "z", commitState.volumeDims.z))
+		{
+			globalState.volumeDims.z = commitState.volumeDims.z;
+		}
+		// parameter volumePose
+		if(parameter.getDouble("volumePose", "rotXX", commitState.volumePose.rotXX))
+		{
+			globalState.volumePose.rotXX = commitState.volumePose.rotXX;
+		}
+		if(parameter.getDouble("volumePose", "rotXY", commitState.volumePose.rotXY))
+		{
+			globalState.volumePose.rotXY = commitState.volumePose.rotXY;
+		}
+		if(parameter.getDouble("volumePose", "rotXZ", commitState.volumePose.rotXZ))
+		{
+			globalState.volumePose.rotXZ = commitState.volumePose.rotXZ;
+		}
+		if(parameter.getDouble("volumePose", "rotYX", commitState.volumePose.rotYX))
+		{
+			globalState.volumePose.rotYX = commitState.volumePose.rotYX;
+		}
+		if(parameter.getDouble("volumePose", "rotYY", commitState.volumePose.rotYY))
+		{
+			globalState.volumePose.rotYY = commitState.volumePose.rotYY;
+		}
+		if(parameter.getDouble("volumePose", "rotYZ", commitState.volumePose.rotYZ))
+		{
+			globalState.volumePose.rotYZ = commitState.volumePose.rotYZ;
+		}
+		if(parameter.getDouble("volumePose", "rotZX", commitState.volumePose.rotZX))
+		{
+			globalState.volumePose.rotZX = commitState.volumePose.rotZX;
+		}
+		if(parameter.getDouble("volumePose", "rotZY", commitState.volumePose.rotZY))
+		{
+			globalState.volumePose.rotZY = commitState.volumePose.rotZY;
+		}
+		if(parameter.getDouble("volumePose", "rotZZ", commitState.volumePose.rotZZ))
+		{
+			globalState.volumePose.rotZZ = commitState.volumePose.rotZZ;
+		}
+		if(parameter.getDouble("volumePose", "translX", commitState.volumePose.translX))
+		{
+			globalState.volumePose.translX = commitState.volumePose.translX;
+		}
+		if(parameter.getDouble("volumePose", "translY", commitState.volumePose.translY))
+		{
+			globalState.volumePose.translY = commitState.volumePose.translY;
+		}
+		if(parameter.getDouble("volumePose", "translZ", commitState.volumePose.translZ))
+		{
+			globalState.volumePose.translZ = commitState.volumePose.translZ;
+		}
 		
 		//
 		// load extended parameters (if any)

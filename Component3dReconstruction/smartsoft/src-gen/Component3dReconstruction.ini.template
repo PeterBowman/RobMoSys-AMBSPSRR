@@ -91,6 +91,71 @@ roboticMiddleware ACE_SmartSoft
 #####################
 # internal parameters
 #####################
+##########################
+# InternalParameter bilateral
+[bilateral]
+kernelSize 7
+sigmaDepth 0.04
+sigmaSpatial 4.5
+
+##########################
+# InternalParameter icp
+[icp]
+angleThresh 0.523599
+distThresh 0.1
+iteration1 10
+iteration2 5
+iteration3 4
+iteration4 0
+iteration5 0
+pyramidLevels 3
+
+##########################
+# InternalParameter lightPose
+[lightPose]
+x 0
+y 0
+z 0
+
+##########################
+# InternalParameter settings
+[settings]
+depthFactor 5000
+raycastStepFactor 0.25
+truncateThreshold 0
+volumeType TSDF
+voxelSize 0.00586
+
+##########################
+# InternalParameter tsdf
+[tsdf]
+maxWeight 64
+minCameraMovement 0
+truncDist 0.041016
+
+##########################
+# InternalParameter volumeDims
+[volumeDims]
+x 512
+y 512
+z 512
+
+##########################
+# InternalParameter volumePose
+[volumePose]
+rotXX 0
+rotXY 0
+rotXZ 0
+rotYX 0
+rotYY 0
+rotYZ 0
+rotZX 0
+rotZY 0
+rotZZ 0
+translX -1.5
+translY -1.5
+translZ 0.5
+
 
 #####################
 # extended parameters

@@ -1,3 +1,111 @@
 ComponentParameter Component3dReconstruction component Component3dReconstruction
 {
+	/** general settings */
+	InternalParameter settings
+	{
+		/** volume type for KinFu algorithm */
+		volumeType: InlineEnumeration { TSDF HASHTSDF } = TSDF
+		/** pre-scale per 1 meter for input values */
+		depthFactor: Float = 5000
+		/** size of voxel (meters) */
+		voxelSize: Float = 0.00586
+		/** a length in voxel sizes of one raycast step */
+		raycastStepFactor: Float = 0.25
+		/** threshold for depth truncation (meters) */
+		truncateThreshold: Float = 0
+	}
+	
+	/** bilateral filter parameters to the KinFu algorithm */
+	InternalParameter bilateral
+	{
+		/** depth sigma for bilateral smooth (meters) */
+		sigmaDepth: Float = 0.04
+		/** spatial sigma for bilateral smooth (pixels) */
+		sigmaSpatial: Float = 4.5
+		/** kernel size for bilateral smooth (pixels) */
+		kernelSize: Int32 = 7
+	}
+	
+	/** ICP parameters to the KinFu algorithm */
+	InternalParameter icp
+	{
+		/** angle threshold (radians) */
+		angleThresh: Float = 0.523599
+		/** distance threshold (meters) */
+		distThresh: Float = 0.1
+		/** number of iterations for first level of ICP */
+		iteration1: Int32 = 10
+		/** number of iterations for second level of ICP */
+		iteration2: Int32 = 5
+		/** number of iterations for third level of ICP */
+		iteration3: Int32 = 4
+		/** number of iterations for fourth level of ICP */
+		iteration4: Int32 = 0
+		/** number of iterations for fifth level of ICP */
+		iteration5: Int32 = 0
+		/** number of pyramid levels for ICP */
+		pyramidLevels: Int32 = 3
+	}
+	
+	/** TSDF parameters to the KinFu algorithm */
+	InternalParameter tsdf
+	{
+		/** minimal camera movement (meters) */
+		minCameraMovement: Float = 0
+		/** distance to truncate (meters) */
+		truncDist: Float = 0.041016
+		/** max number of frames per voxel */
+		maxWeight: Int32 = 64
+	}
+	
+	/** resolution of voxel space */
+	InternalParameter volumeDims
+	{
+		/** number of voxels in the X axis */
+		x: Int32 = 512
+		/** number of voxels in the Y axis */
+		y: Int32 = 512
+		/** number of voxels in the Z axis */
+		z: Int32 = 512
+	}
+	
+	/** initial volume pose */
+	InternalParameter volumePose
+	{
+		/** rotation in axis X, component X (radians) */
+		rotXX: Float = 0
+		/** rotation in axis Y, component X (radians) */
+		rotXY: Float = 0
+		/** rotation in axis Z, component X (radians) */
+		rotXZ: Float = 0
+		/** rotation in axis X, component Y (radians) */
+		rotYX: Float = 0
+		/** rotation in axis Y, component Y (radians) */
+		rotYY: Float = 0
+		/** rotation in axis Z, component Y (radians) */
+		rotYZ: Float = 0
+		/** rotation in axis X, component Z (radians) */
+		rotZX: Float = 0
+		/** rotation in axis Y, component Z (radians) */
+		rotZY: Float = 0
+		/** rotation in axis Z, component Z (radians) */
+		rotZZ: Float = 0
+		/** X translation (meters) */
+		translX: Float = -1.5
+		/** Z translation (meters) */
+		translY: Float = -1.5
+		/** Y translation (meters) */
+		translZ: Float = 0.5
+	}
+	
+	/** light pose for rendering */
+	InternalParameter lightPose
+	{
+		/** X translation (meters) */
+		x: Int32 = 0
+		/** Y translation (meters) */
+		y: Int32 = 0
+		/** Z translation (meters) */
+		z: Int32 = 0
+	}
 }

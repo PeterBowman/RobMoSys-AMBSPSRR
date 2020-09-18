@@ -26,6 +26,9 @@ void CompHandler::onStartup()
 {
 	std::cout << "startup - put your startupCode in CompHandler::onStartup()!!!\n";
 
+	// set initial KinFu parameters
+	COMP->setInitialParameters(COMP->getParameters());
+
 	Smart::StatusCode status;
 
 	// Start all services. If you need manual control, use the content of this function to
