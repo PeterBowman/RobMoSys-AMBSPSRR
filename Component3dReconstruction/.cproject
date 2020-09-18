@@ -32,6 +32,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Component3dReconstruction/smartsoft/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Component3dReconstruction/smartsoft/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/opencv4"/>
+									<listOptionValue builtIn="false" value="/home/bartek/cr-rms/include/Armadillo"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.529790915" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -86,7 +87,6 @@
 									<listOptionValue builtIn="false" value="&quot;${SMART_ROOT_ACE}/include/AceSmartSoftKernel/middlewareMapping&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Component3dReconstruction/smartsoft/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Component3dReconstruction/smartsoft/src-gen}&quot;"/>
-									<listOptionValue builtIn="false" value="/usr/local/include/opencv4"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.794237789" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>

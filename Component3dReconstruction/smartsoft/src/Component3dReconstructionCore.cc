@@ -25,7 +25,6 @@ Component3dReconstructionCore::Component3dReconstructionCore()
 	std::cout << "constructor Component3dReconstructionCore\n";
 	cv::setUseOptimized(true); // use OpenCL
 	params = cv::kinfu::Params::defaultParams();
-	kinfu = cv::kinfu::KinFu::create(params);
 }
 
 void Component3dReconstructionCore::setInitialParameters(const ParameterStateStruct& p)
