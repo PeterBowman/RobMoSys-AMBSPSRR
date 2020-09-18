@@ -36,9 +36,7 @@ void PointCloudQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id,
 	{
 		cv::Mat points;
 		COMP->kinfu->getPoints(points);
-
-		std::vector<CommBasicObjects::CommPosition3d> positions; // TODO: fill
-		answer.setPoints(positions);
+		Component3dReconstruction::fromCvMat(points, answer);
 	}
 	else
 	{

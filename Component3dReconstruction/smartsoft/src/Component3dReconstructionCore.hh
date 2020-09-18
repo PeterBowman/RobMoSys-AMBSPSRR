@@ -18,9 +18,10 @@
 #define _COMPONENT3DRECONSTRUCTIONCORE_HH
 	
 #include "aceSmartSoft.hh"
+#include "DomainVision/Comm3dPointCloud.hh"
+#include "ParameterStateStruct.hh"
 #include <iostream>
 #include <opencv2/rgbd/kinfu.hpp>
-#include "ParameterStateStruct.hh"
 
 class Component3dReconstructionCore
 {
@@ -29,6 +30,7 @@ private:
 public:
 	Component3dReconstructionCore();
 	void setInitialParameters(const ParameterStateStruct& p);
+	static void fromCvMat(const cv::Mat& in, DomainVision::Comm3dPointCloud& out);
 
 	cv::Ptr<cv::kinfu::KinFu> kinfu;
 	cv::Ptr<cv::kinfu::Params> params;

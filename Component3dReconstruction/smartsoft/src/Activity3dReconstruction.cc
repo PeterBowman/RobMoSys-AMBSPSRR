@@ -50,8 +50,7 @@ int Activity3dReconstruction::on_execute()
 
 	if (status == Smart::StatusCode::SMART_OK)
 	{
-		auto data = depthImageIn.getDataRef();
-		cv::Mat depth; // TODO: fill
+		cv::Mat depth(depthImageIn.getWidth(), depthImageIn.getHeight(), CV_32FC1, depthImageIn.getDataRef().data());
 
 		if (!COMP->kinfu->update(depth))
 		{
@@ -69,11 +68,12 @@ int Activity3dReconstruction::on_execute()
 			cv::Mat points;
 			COMP->kinfu->getPoints(points);
 
-			DomainVision::CommVideoImage rgbImageOut;
-			status = COMP->rGBImagePushServiceOut->put(rgbImageOut); // TODO: convert
+			DomainVision::CommVideoImage rgbImageOut(rendered.rows, rendered.cols, DomainVision::FormatType::RGB32, rendered.data);
+			status = COMP->rGBImagePushServiceOut->put(rgbImageOut);
 
 			DomainVision::Comm3dPointCloud pointCloudOut;
-			status = COMP->pointCloudPushServiceOut->put(pointCloudOut); // TODO: convert
+			Component3dReconstruction::fromCvMat(points, pointCloudOut);
+			status = COMP->pointCloudPushServiceOut->put(pointCloudOut);
 		}
 	}
 

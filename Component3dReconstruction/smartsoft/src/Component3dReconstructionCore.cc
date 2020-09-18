@@ -70,3 +70,14 @@ void Component3dReconstructionCore::setInitialParameters(const ParameterStateStr
 	params->lightPose = cv::Vec3f(p.getLightPose().getX(), p.getLightPose().getY(), p.getLightPose().getZ());
 	params->truncateThreshold = p.getSettings().getTruncateThreshold();
 }
+
+void Component3dReconstructionCore::fromCvMat(const cv::Mat& in, DomainVision::Comm3dPointCloud& out)
+{
+	out.set_size(in.rows);
+
+	for (int i = 0; i < in.rows; i++)
+	{
+		auto point = in.at<cv::Vec3f>(i);
+		out.set_point(i, point.val[0], point.val[1], point.val[2], 1.0);
+	}
+}
