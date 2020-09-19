@@ -1,0 +1,14 @@
+DeploymentModel SystemRealSense3dReconstruction using ComponentArchitecture SystemRealSense3dReconstruction
+{
+TargetPlatformReference PC1 using SystemRealSense3dReconstruction.PC1
+	{
+		UploadDirectory "/tmp"
+		NetworkInterface eth1
+	}
+	ComponentArtefact ComponentRealSenseV2Server deploy-to PC1
+	ComponentArtefact Component3dReconstruction deploy-to PC1
+	ComponentArtefact ComponentVisualization deploy-to PC1
+	NamingService
+	{
+		deploy-to PC1 }
+}

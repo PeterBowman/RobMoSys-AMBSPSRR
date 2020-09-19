@@ -1,0 +1,43 @@
+SystemComponentArchitecture SystemRealSense3dReconstruction
+{
+ComponentInstance ComponentRealSenseV2Server instantiates ComponentRealSenseV2Server
+	{
+		RequiredService basePushTimedClient
+		RequiredService ptuPosePushNewestClient
+		RequiredService UrPosePushTimedClient
+		RequiredService UrPoseQueryClient
+		ProvidedService depthPushNewestServer
+		ProvidedService imagePushNewestServer
+		ProvidedService colorImagePushNewestServer
+		ProvidedService imageQueryServer
+		ProvidedService colorImageQueryServer
+	}
+	ComponentInstance Component3dReconstruction instantiates Component3dReconstruction
+	{
+		RequiredService DepthImagePushServiceIn
+		ProvidedService RGBImagePushServiceOut
+		ProvidedService PointCloudPushServiceOut
+		ProvidedService PointCloudQueryServiceAnsw
+	}
+	ComponentInstance ComponentVisualization instantiates ComponentVisualization
+	{
+		RequiredService rgbdPushNewestClient
+		RequiredService rgbdQueryClient
+		RequiredService baseClient
+		RequiredService laserClient1
+		RequiredService laserClient2
+		RequiredService laserClient3
+		RequiredService irPushNewestClient
+		RequiredService imagePushNewestClient
+		RequiredService curPushClient
+		RequiredService depthPushNewestClient
+		RequiredService ultrasonicPushNewestClient
+		RequiredService personDetectionEventClient
+		RequiredService MarkerListDetectionServiceIn
+		RequiredService RGBDImageQueryServiceReq
+		RequiredService ltmQueryClient
+		RequiredService personDetectionQueryClient
+	}
+	Connection Component3dReconstruction.DepthImagePushServiceIn -> ComponentRealSenseV2Server.depthPushNewestServer
+	Connection ComponentVisualization.imagePushNewestClient -> Component3dReconstruction.RGBImagePushServiceOut
+}
