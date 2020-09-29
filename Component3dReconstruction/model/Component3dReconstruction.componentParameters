@@ -92,9 +92,9 @@ ComponentParameter Component3dReconstruction component Component3dReconstruction
 		rotZZ: Float = 0
 		/** X translation (meters) */
 		translX: Float = -1.5
-		/** Z translation (meters) */
-		translY: Float = -1.5
 		/** Y translation (meters) */
+		translY: Float = -1.5
+		/** Z translation (meters) */
 		translZ: Float = 0.5
 	}
 	
