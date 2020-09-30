@@ -48,7 +48,6 @@ void Component3dReconstructionCore::setInitialParameters(const ParameterStateStr
 	params->bilateral_kernel_size = p.getBilateral().getKernelSize();
 	params->icpAngleThresh = p.getIcp().getAngleThresh();
 	params->icpDistThresh = p.getIcp().getDistThresh();
-	params->icpIterations = {10, 5, 4};
 	params->icpIterations = {p.getIcp().getIteration1(), p.getIcp().getIteration2(), p.getIcp().getIteration3(),
 			p.getIcp().getIteration4(), p.getIcp().getIteration5()};
 	std::remove(params->icpIterations.begin(), params->icpIterations.end(), 0);
