@@ -32,7 +32,7 @@ void PointCloudQueryServiceAnswHandler::handleQuery(const Smart::QueryIdPtr &id,
 	
 	Smart::StatusCode status = COMP->stateSlave->tryAcquire("queryimage");
 
-	if (status == Smart::StatusCode::SMART_OK)
+	if (COMP->kinfu != nullptr && status == Smart::StatusCode::SMART_OK)
 	{
 		cv::Mat points;
 		COMP->kinfu->getPoints(points);

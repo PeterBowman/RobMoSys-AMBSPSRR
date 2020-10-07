@@ -35,28 +35,6 @@ int Activity3dReconstruction::on_entry()
 	// do initialization procedures here, which are called once, each time the task is started
 	// it is possible to return != 0 (e.g. when initialization fails) then the task is not executed further
 
-	DomainVision::CommDepthImage depthImageIn;
-	Smart::StatusCode status = COMP->depthImagePushServiceIn->getUpdate(depthImageIn);
-
-	if (status != Smart::StatusCode::SMART_OK)
-	{
-		std::cout << "unable to retrieve first frame\n";
-		return -1;
-	}
-
-	int width = depthImageIn.getWidth();
-	int height = depthImageIn.getHeight();
-	auto intrinsic = depthImageIn.get_intrinsic();
-
-	COMP->params->frameSize = cv::Size(width, height);
-
-	COMP->params->intr = cv::Matx33f(
-			intrinsic(0, 0), intrinsic(0, 1), intrinsic(0, 2),
-			intrinsic(1, 0), intrinsic(1, 1), intrinsic(1, 2),
-			intrinsic(2, 0), intrinsic(2, 1), intrinsic(2, 2));
-
-	COMP->kinfu = cv::kinfu::KinFu::create(COMP->params);
-
 	return 0;
 }
 int Activity3dReconstruction::on_execute()
@@ -73,6 +51,22 @@ int Activity3dReconstruction::on_execute()
 
 	if (status == Smart::StatusCode::SMART_OK)
 	{
+		if (COMP->kinfu == nullptr)
+		{
+			int width = depthImageIn.getWidth();
+			int height = depthImageIn.getHeight();
+			auto intrinsic = depthImageIn.get_intrinsic();
+
+			COMP->params->frameSize = cv::Size(width, height);
+
+			COMP->params->intr = cv::Matx33f(
+					intrinsic(0, 0), intrinsic(0, 1), intrinsic(0, 2),
+					intrinsic(1, 0), intrinsic(1, 1), intrinsic(1, 2),
+					intrinsic(2, 0), intrinsic(2, 1), intrinsic(2, 2));
+
+			COMP->kinfu = cv::kinfu::KinFu::create(COMP->params);
+		}
+
 		cv::Mat depth(depthImageIn.getWidth(), depthImageIn.getHeight(), CV_32FC1, depthImageIn.getDataRef().data());
 
 		if (!COMP->kinfu->update(depth))
@@ -103,6 +97,7 @@ int Activity3dReconstruction::on_execute()
 	// it is possible to return != 0 (e.g. when the task detects errors), then the outer loop breaks and the task stops
 	return 0;
 }
+
 int Activity3dReconstruction::on_exit()
 {
 	// use this method to clean-up resources which are initialized in on_entry() and needs to be freed before the on_execute() can be called again
