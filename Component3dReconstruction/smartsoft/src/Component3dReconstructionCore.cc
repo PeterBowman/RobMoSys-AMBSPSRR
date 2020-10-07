@@ -50,8 +50,8 @@ void Component3dReconstructionCore::setInitialParameters(const ParameterStateStr
 	params->icpDistThresh = p.getIcp().getDistThresh();
 	params->icpIterations = {p.getIcp().getIteration1(), p.getIcp().getIteration2(), p.getIcp().getIteration3(),
 			p.getIcp().getIteration4(), p.getIcp().getIteration5()};
-	std::remove(params->icpIterations.begin(), params->icpIterations.end(), 0);
 	params->pyramidLevels = p.getIcp().getPyramidLevels();
+	params->icpIterations.resize(params->pyramidLevels);
 	params->tsdf_min_camera_movement = p.getTsdf().getMinCameraMovement();
 	params->volumeDims = cv::Vec3i(p.getVolumeDims().getX(), p.getVolumeDims().getY(), p.getVolumeDims().getZ());
 	params->voxelSize = p.getSettings().getVoxelSize();
