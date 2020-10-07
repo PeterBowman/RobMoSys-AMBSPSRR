@@ -1,7 +1,0 @@
-# This file is generated using the SmartMDSD Toolchain.
-# Any changes will be overwritten next time the deployment project
-# is deployed/run from within the SmartMDSD toolchain.
-
-REFERENCED_PROJECT_Component3dReconstruction="/home/bartek/cr-rms/repos/AMBSPSRR/Component3dReconstruction"
-REFERENCED_PROJECT_ComponentRealSenseV2Server="/home/bartek/cr-rms/repos/ComponentRepository/ComponentRealSenseV2Server"
-REFERENCED_PROJECT_ComponentVisualization="/home/bartek/cr-rms/repos/ComponentRepository/ComponentVisualization"
