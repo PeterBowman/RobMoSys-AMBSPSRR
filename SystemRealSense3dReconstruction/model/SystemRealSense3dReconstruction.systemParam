@@ -1,9 +1,7 @@
-SystemParameterModel SystemRealSenseVisualization extendsSystem SystemRealSenseVisualization {
+SystemParameterModel SystemRealSense3dReconstruction extendsSystem SystemRealSense3dReconstruction {
 	ComponentParameterInstance ComponentRealSenseV2Server refinesParamStruct ComponentRealSenseV2ServerParams {
 		ParameterRefinement settings {
-			pushnewest_color_image = true
 			pushnewest_depth_image = true
-			pushnewest_rgbd_image = true
 		}
 	}
 }
