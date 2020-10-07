@@ -67,7 +67,7 @@ int Activity3dReconstruction::on_execute()
 			COMP->kinfu = cv::kinfu::KinFu::create(COMP->params);
 		}
 
-		cv::Mat depth(depthImageIn.getWidth(), depthImageIn.getHeight(), CV_32FC1, depthImageIn.getDataRef().data());
+		cv::Mat depth(depthImageIn.getHeight(), depthImageIn.getWidth(), CV_32FC1, depthImageIn.getDataRef().data());
 
 		if (!COMP->kinfu->update(depth))
 		{
