@@ -40,7 +40,7 @@ SMART_COMPONENT_AUTOBUILD_DEPENDENCIES()
 ## using regular CMake commands (like FIND_PACKAGE, INCLUDE_DIRECTORIES, etc.) ##
 
 # you can add additional external libraries using regular CMake commands, e.g.:
-FIND_PACKAGE(OpenCV 4.4 REQUIRED core rgbd)
+FIND_PACKAGE(OpenCV 4.4 REQUIRED core imgproc rgbd)
 
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/src-gen/MixedPortIncludes.cmake)
 

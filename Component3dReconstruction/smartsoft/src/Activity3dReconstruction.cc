@@ -19,6 +19,8 @@
 
 #include <iostream>
 
+#include <opencv2/imgproc.hpp>
+
 Activity3dReconstruction::Activity3dReconstruction(SmartACE::SmartComponent *comp) 
 :	Activity3dReconstructionCore(comp)
 {
@@ -67,7 +69,7 @@ int Activity3dReconstruction::on_execute()
 			COMP->kinfu = cv::kinfu::KinFu::create(COMP->params);
 		}
 
-		cv::Mat depth(depthImageIn.getHeight(), depthImageIn.getWidth(), CV_32FC1, depthImageIn.getDataRef().data());
+		cv::Mat depth(depthImageIn.getHeight(), depthImageIn.getWidth(), CV_16UC1, depthImageIn.getDataRef().data());
 
 		if (!COMP->kinfu->update(depth))
 		{
@@ -79,17 +81,20 @@ int Activity3dReconstruction::on_execute()
 
 		if (status == Smart::StatusCode::SMART_OK)
 		{
-			cv::Mat rendered;
+			cv::UMat rendered;
 			COMP->kinfu->render(rendered);
 
-			cv::Mat points;
+			cv::UMat points;
 			COMP->kinfu->getPoints(points);
 
-			DomainVision::CommVideoImage rgbImageOut(rendered.rows, rendered.cols, DomainVision::FormatType::RGB32, rendered.data);
+			cv::cvtColor(rendered, rendered, cv::COLOR_BGRA2RGB);
+			cv::Mat _rendered = rendered.getMat(cv::ACCESS_READ);
+			DomainVision::CommVideoImage rgbImageOut(_rendered.cols, _rendered.rows, DomainVision::FormatType::RGB24, _rendered.data);
 			status = COMP->rGBImagePushServiceOut->put(rgbImageOut);
 
+			cv::Mat _points = points.getMat(cv::ACCESS_READ);
 			DomainVision::Comm3dPointCloud pointCloudOut;
-			Component3dReconstruction::fromCvMat(points, pointCloudOut);
+			Component3dReconstruction::fromCvMat(_points, pointCloudOut);
 			status = COMP->pointCloudPushServiceOut->put(pointCloudOut);
 		}
 	}
