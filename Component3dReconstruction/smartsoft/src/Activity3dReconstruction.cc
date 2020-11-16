@@ -21,6 +21,26 @@
 
 #include <opencv2/imgproc.hpp>
 
+namespace
+{
+	int getCvPixelType(DomainVision::DepthFormatType type)
+	{
+		switch (type)
+		{
+		case DomainVision::DepthFormatType::UINT8:
+			return CV_8U;
+		case DomainVision::DepthFormatType::UINT16:
+			return CV_16U;
+		case DomainVision::DepthFormatType::FLOAT:
+			return CV_32F;
+		case DomainVision::DepthFormatType::DOUBLE:
+			return CV_64F;
+		default:
+			return -1;
+		}
+	}
+}
+
 Activity3dReconstruction::Activity3dReconstruction(SmartACE::SmartComponent *comp) 
 :	Activity3dReconstructionCore(comp)
 {
@@ -69,7 +89,15 @@ int Activity3dReconstruction::on_execute()
 			COMP->kinfu = cv::kinfu::KinFu::create(COMP->params);
 		}
 
-		cv::Mat depth(depthImageIn.getHeight(), depthImageIn.getWidth(), CV_16UC1, depthImageIn.getDataRef().data());
+		int type = getCvPixelType(depthImageIn.getFormat());
+
+		if (type < 0)
+		{
+			std::cout << "unsupported pixel type\n";
+			return 1;
+		}
+
+		cv::Mat depth(depthImageIn.getHeight(), depthImageIn.getWidth(), type, depthImageIn.getDataRef().data());
 
 		if (!COMP->kinfu->update(depth))
 		{
